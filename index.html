@@ -1,21 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My AI Assistant</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 25px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    #chat {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border-radius: 18px;
+      line-height: 1.4;
+    }
+
+    .assistant {
+      background: #292929;
+      margin-right: auto;
+    }
+
+    .user {
+      background: #5b35d5;
+      margin-left: auto;
+    }
+
+    #controls {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    #talkButton {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: none;
+      background: #6c42ff;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    #talkButton:active {
+      transform: scale(0.94);
+    }
+  </style>
 </head>
 
 <body>
-  <h1>🤖 My AI Assistant</h1>
-  <p>I'm alive.</p>
 
-  <button onclick="speak()">Test Voice</button>
+  <header>🤖 My AI Assistant</header>
+
+  <main id="chat">
+    <div class="message assistant">
+      Hey! I'm your assistant. Tap the microphone to talk to me.
+    </div>
+  </main>
+
+  <div id="controls">
+    <button id="talkButton">🎤</button>
+  </div>
 
   <script>
-    function speak() {
-      const voice = new SpeechSynthesisUtterance("Hello! I'm your AI assistant.");
+    const chat = document.getElementById("chat");
+    const button = document.getElementById("talkButton");
+
+    function addMessage(text, type) {
+      const message = document.createElement("div");
+      message.className = "message " + type;
+      message.textContent = text;
+      chat.appendChild(message);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function speak(text) {
+      const voice = new SpeechSynthesisUtterance(text);
       speechSynthesis.speak(voice);
     }
+
+    button.addEventListener("click", () => {
+      const response = "I heard you! The voice system is working.";
+
+      addMessage("🎤 You pressed the button.", "user");
+      addMessage(response, "assistant");
+
+      speak(response);
+    });
   </script>
+
 </body>
 </html>
