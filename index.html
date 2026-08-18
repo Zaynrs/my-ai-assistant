@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My AI Assistant</title>
+</head>
+
+<body>
+  <h1>🤖 My AI Assistant</h1>
+  <p>I'm alive.</p>
+
+  <button onclick="speak()">Test Voice</button>
+
+  <script>
+    function speak() {
+      const voice = new SpeechSynthesisUtterance("Hello! I'm your AI assistant.");
+      speechSynthesis.speak(voice);
+    }
+  </script>
+</body>
+</html>
